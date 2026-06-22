@@ -1,0 +1,48 @@
+import { LangDict } from './default'
+
+export default {
+  es_ES: {
+    0: 'Iniciando Forgejo!',
+    1: 'demonio principal',
+    2: 'Interfaz web',
+    3: 'SSH',
+    4: 'Forgejo esta listo',
+    5: 'Forgejo no esta listo',
+    6: 'Tu servidor Git Forgejo',
+    7: 'Interfaz web de Forgejo',
+    8: 'Puerto SSH para operaciones Git',
+  },
+  de_DE: {
+    0: 'Forgejo wird gestartet!',
+    1: 'Primaerer Daemon',
+    2: 'Weboberflaeche',
+    3: 'SSH',
+    4: 'Forgejo ist bereit',
+    5: 'Forgejo ist nicht bereit',
+    6: 'Dein Forgejo-Git-Server',
+    7: 'Forgejo-Weboberflaeche',
+    8: 'SSH-Port fuer Git-Operationen',
+  },
+  pl_PL: {
+    0: 'Uruchamianie Forgejo!',
+    1: 'glowny demon',
+    2: 'Interfejs web',
+    3: 'SSH',
+    4: 'Forgejo jest gotowe',
+    5: 'Forgejo nie jest gotowe',
+    6: 'Twoj serwer Git Forgejo',
+    7: 'Interfejs web Forgejo',
+    8: 'Port SSH do operacji Git',
+  },
+  fr_FR: {
+    0: 'Demarrage de Forgejo !',
+    1: 'demon principal',
+    2: 'Interface web',
+    3: 'SSH',
+    4: 'Forgejo est pret',
+    5: 'Forgejo n est pas pret',
+    6: 'Votre serveur Git Forgejo',
+    7: 'Interface web Forgejo',
+    8: 'Port SSH pour les operations Git',
+  },
+} satisfies Record<string, LangDict>
