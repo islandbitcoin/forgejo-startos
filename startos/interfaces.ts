@@ -27,7 +27,7 @@ export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
     name: i18n('SSH'),
     id: 'ssh',
     description: i18n('SSH port for Git operations'),
-    type: 'raw' as any,
+    type: 'p2p',
     masked: false,
     schemeOverride: null,
     username: null,
