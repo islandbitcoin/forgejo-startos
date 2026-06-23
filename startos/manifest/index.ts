@@ -4,8 +4,8 @@ import i18n from './i18n'
 export const manifest = setupManifest({
   id: 'forgejo',
   title: 'Forgejo',
-  license: 'MIT',
-  packageRepo: 'https://github.com/islandbitcoin/forgejo-startos',
+  license: 'GPL-3.0-or-later',
+  packageRepo: 'https://github.com/Start9Labs/forgejo-startos',
   upstreamRepo: 'https://codeberg.org/forgejo/forgejo',
   marketingUrl: 'https://forgejo.org',
   donationUrl: null,
@@ -13,7 +13,7 @@ export const manifest = setupManifest({
   volumes: ['main'],
   images: {
     forgejo: {
-      source: { dockerTag: 'codeberg.org/forgejo/forgejo:15-rootless' },
+      source: { dockerTag: 'codeberg.org/forgejo/forgejo:15.0.3' },
       arch: ['x86_64', 'aarch64'],
     },
   },

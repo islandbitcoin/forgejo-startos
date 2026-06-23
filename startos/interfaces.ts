@@ -1,5 +1,5 @@
 import { sdk } from './sdk'
-import { httpPort, sshPort } from './utils'
+import { httpPort, sshPort, mountVolume } from './utils'
 import { i18n } from './i18n'
 
 export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
@@ -8,9 +8,9 @@ export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
     protocol: 'http',
   })
   const api = sdk.createInterface(effects, {
-    name: i18n('Forgejo Web UI'),
+    name: i18n('Web UI and git (HTTP)'),
     id: 'api',
-    description: i18n('Web UI'),
+    description: i18n('Web UI for Forgejo. Also used for git over HTTP'),
     type: 'ui',
     masked: false,
     schemeOverride: null,
@@ -24,13 +24,13 @@ export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
     protocol: 'ssh',
   })
   const ssh = sdk.createInterface(effects, {
-    name: i18n('SSH'),
+    name: i18n('git (SSH)'),
     id: 'ssh',
-    description: i18n('SSH port for Git operations'),
-    type: 'p2p',
+    description: i18n('Used for git over SSH'),
+    type: 'api',
     masked: false,
     schemeOverride: null,
-    username: null,
+    username: 'git',
     path: '',
     query: {},
   })

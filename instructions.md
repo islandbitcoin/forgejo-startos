@@ -1,40 +1,40 @@
 # Forgejo
 
-Forgejo is a self-hosted Git forge for repositories, issues, pull requests, packages, and project collaboration.
-
 ## Documentation
 
-- [Forgejo documentation](https://forgejo.org/docs/latest/) - upstream installation, administration, and user guides.
-- [Forgejo configuration cheat sheet](https://forgejo.org/docs/latest/admin/config-cheat-sheet/) - supported configuration keys and environment variable format.
+- [Forgejo documentation](https://forgejo.org/docs) — upstream reference covering repositories, organizations, the admin panel, Forgejo Actions, the API, and `app.ini` settings.
 
 ## What you get on StartOS
 
-- A **Forgejo Web UI** interface on port 3000 for browser-based repository management.
-- An **SSH** interface on port 2222 for Git operations over SSH.
-- Persistent Forgejo data stored in the `main` volume at `/var/lib/gitea`.
-- SQLite storage by default, created by Forgejo on first start.
+- A **Web UI and git (HTTP)** interface — the Forgejo web app, and the endpoint for cloning, pushing, and pulling over HTTP.
+- A **git (SSH)** interface (user `git`) for cloning, pushing, and pulling over SSH.
+- An embedded SQLite database stored alongside repositories and LFS objects in a single managed volume — no separate database to install or configure.
 
 ## Getting set up
 
-1. Start the service and open the **Forgejo Web UI** interface.
-2. Complete the Forgejo installation wizard. The default database type is SQLite, and the data path is stored in the service volume.
-3. Create the first user account. Forgejo grants site administration rights to the first registered user.
-4. In Forgejo, add your SSH public key to your account before cloning or pushing over the **SSH** interface.
+On first start Forgejo posts a **Create Admin User** task. Until you complete it, the service has no administrator.
 
-## Git access
+1. Run the **Create Admin User** task. Provide a username and email. A strong password is generated and shown once — copy it before dismissing the result. If you lose it later, run **Reset Admin Password**.
+2. Sign in to the Web UI with those credentials.
+3. If you plan to send emails (notifications, invitations, password resets), run **Configure SMTP** and pick either your StartOS system SMTP or custom credentials.
 
-Use the web interface for HTTPS clone URLs and the SSH interface for SSH clone URLs. The rootless Forgejo image listens for SSH on port 2222 inside the container, which StartOS exposes through the **SSH** interface.
+## Using Forgejo
 
-## Configuration
+### Web UI and git over HTTP
 
-Forgejo supports environment-based configuration in the form:
+Open the **Web UI and git (HTTP)** interface to reach the Forgejo web app. The same hostnames serve git over HTTP, so you can clone, push, and pull using the URLs Forgejo shows on each repository page.
 
-```
-FORGEJO__[SECTION]__[KEY]=value
-```
+### git over SSH
 
-For example, upstream Forgejo settings from the `[server]` section can be supplied as `FORGEJO__server__ROOT_URL`, `FORGEJO__server__SSH_PORT`, and similar keys if this package is extended with user configuration in the future.
+Open the **git (SSH)** interface to see the SSH host and port. Add your SSH public key under your Forgejo user settings, then use the `git@…` URLs Forgejo generates on each repository page.
 
-## Backups
+### Actions
 
-The StartOS backup for this service includes the `main` volume. Backups include the SQLite database, repositories, attachments, avatars, and configuration files stored under `/var/lib/gitea`.
+- **Set Primary Url** — pick which of the available HTTP URLs Forgejo uses when generating clone URLs, links in emails, OAuth callbacks, and so on. Switch this whenever you add or change a domain you want users to see.
+- **Enable / Disable Registrations** — toggle whether anyone with your Forgejo URL can create an account. Registrations are disabled by default; enabling them is a public-signup decision, so the action confirms it with a warning.
+- **Configure SMTP** — set the credentials Forgejo uses to send mail. Choose your StartOS system SMTP or supply a custom host, port, from-address, username, and password.
+- **Reset Admin Password** — pick an existing admin user and generate a new password for them. Use this to rotate the password or to recover an account whose password you've lost.
+
+### Large file storage
+
+Git LFS is enabled and stored alongside your repositories in the managed volume. Enable LFS per repository in its settings; use the Git LFS client on the pushing machine as you would with upstream Forgejo.
