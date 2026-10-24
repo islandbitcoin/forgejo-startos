@@ -65,7 +65,7 @@ oneshot changes ownership of the data directory to this user.
 After first launch, open the **Forgejo Web UI** interface. Forgejo will show
 its installation page where you choose:
 
-- **Database**: SQLite (default) — no external DB needed
+- **Database**: SQLite (default): no external DB needed
 - **Admin account**: Create your initial administrator user
 - **Server settings**: Leave defaults or customize
 
@@ -106,7 +106,7 @@ None. Administration is handled in the Forgejo web interface.
 
 **Included in backup:**
 
-- `main` volume — SQLite database, repositories, SSH host keys, and all
+- `main` volume: SQLite database, repositories, SSH host keys, and all
   Forgejo data
 
 **Restore behavior:**
@@ -133,13 +133,13 @@ another StartOS service.
 
 ## Limitations and Differences
 
-1. **SQLite-first** — suitable for single-server use; PostgreSQL and MySQL
+1. **SQLite-first**: suitable for single-server use; PostgreSQL and MySQL
    are not wired as configurable options yet.
-2. **Actions runners** — not pre-configured. You can add runners manually
+2. **Actions runners**: not pre-configured. You can add runners manually
    via the Forgejo admin UI after installation.
-3. **No email** — SMTP is not configured by default. Set
+3. **No email**: SMTP is not configured by default. Set
    `FORGEJO__mailer__ENABLED=true` and related vars to enable email.
-4. **SSH on 2222** — the rootless image uses port 2222 internally; the
+4. **SSH on 2222**: the rootless image uses port 2222 internally; the
    StartOS interface exports this so clients access it transparently.
 
 ---
